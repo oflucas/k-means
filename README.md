@@ -17,6 +17,11 @@ optional: numpy array W of shape(n_samples,) as weight. E.x., weight[i] = 2 has 
 
 The clusters of points.
 
+## Usage example
+
+- plot_kmeans_silhouette_analysis.ipynb
+- test_kmeans_lzx.py
+
 ## Technical details
 
 EM
