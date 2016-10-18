@@ -9,7 +9,7 @@ from KMeans_weighted import KMeans_weighted
 
 # In[9]:
 
-clst = KMeans_weighted(k_clusters=2, n_init=4, debug_=True, debug_iter_n_=10)
+clst = KMeans_weighted(k_clusters=2, n_init=4, debug_=True)
 
 
 # In[10]:
@@ -23,9 +23,9 @@ clst.fit(X, W)
 
 
 # In[ ]:
-print "clustering finish, output results:"
-print "final inertia =", clst.inertia_
-print clst.print_clusters(clst.labels_)
-print clst.print_centers(clst.centers_)
+# print "clustering finish, output results:"
+# print "final inertia =", clst.inertia_
+# print clst.print_clusters(clst.labels_)
+# print clst.print_centers(clst.centers_)
 
 
