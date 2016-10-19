@@ -3,10 +3,11 @@ import math as math
 import numpy as np
 
 class KMeans_weighted:
-    def __init__(self, k_clusters=8, n_init=10, maxtol=0.001, debug_=False, debug_iter_n_=200000000, quiet=True):
+    def __init__(self, k_clusters=8, n_init=10, maxtol=0.001, debug_=False, debug_iter_n_=200000000, quiet=True, \
+                        centers=None, labels=None):
         self.k = k_clusters
-        self.labels_ = []  #cluster index of each data entry
-        self.centers_ = []     #means of clusters, shape(k, m), index is cluster index
+        self.labels_ = labels  #cluster index of each data entry
+        self.centers_ = centers     #means of clusters, shape(k, m), index is cluster index
         self.debug = debug_  #debug flag
         self.debug_iter_n = debug_iter_n_
         self.inertia_ = None
