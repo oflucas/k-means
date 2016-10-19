@@ -3,7 +3,7 @@ import math as math
 import numpy as np
 
 class KMeans_weighted:
-    def __init__(self, k_clusters=8, n_init=10, maxtol=0.001, debug_=False, debug_iter_n_=200000000):
+    def __init__(self, k_clusters=8, n_init=10, maxtol=0.001, debug_=False, debug_iter_n_=200000000, quiet=True):
         self.k = k_clusters
         self.labels_ = []  #cluster index of each data entry
         self.centers_ = []     #means of clusters, shape(k, m), index is cluster index
@@ -12,6 +12,7 @@ class KMeans_weighted:
         self.inertia_ = None
         self.tol = maxtol
         self.n_init_ = n_init
+        self.quiet_ = quiet
 
     
     #this method computes the initial means
@@ -92,6 +93,9 @@ class KMeans_weighted:
 
             while not stop:
 
+                if not self.quiet_:
+                    print "iteration =", tt, ".", iter_n
+
                 #assignment step: assign each node to the cluster with the closest mean
                 clusters = self.assign_points(centers1)
                 centers = centers1
@@ -103,7 +107,7 @@ class KMeans_weighted:
 
                 iter_n += 1
                 if self.debug:
-                    print tt, ".", iter_n, "-------------------------RESULTS:"
+                    print "RESULTS:"
                     #self.print_centers(centers)
                     #self.print_clusters(clusters)
                     print "inertia =", inertia
@@ -131,6 +135,26 @@ class KMeans_weighted:
         self.feat_bd[0] = np.amin(self.x, axis=0)
         self.feat_bd[1] = np.amax(self.x, axis=0)
 
+    
+    #predict labels based on trained clusters
+    def predict(self, X):
+    	Y = np.zeros(X.shape[0]).astype(np.int)
+
+        for j in range(X.shape[0]):
+            #find the best cluster for this node
+            min_dist = None
+            min_clst = None
+
+            for i in range(self.k):
+                cur_dist = self.distance_sqr(X[j], self.centers_[i])
+                if min_dist == None or min_dist > cur_dist:
+                    min_dist = cur_dist
+                    min_clst = i
+
+            Y[j] = min_clst
+
+        return Y
+    
 
     #debug function: print cluster points
     def print_clusters(self, clusters):

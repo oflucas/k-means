@@ -15,13 +15,13 @@ clst = KMeans_weighted(k_clusters=2, n_init=4, debug_=True)
 # In[10]:
 
 X = np.array([[1, 2], [1, 4], [1, 0], [4, 2], [4, 4], [4, 0]])
-W = np.array([ 1,     100,      1,      1,      1,      100])
+W = np.array([ 1,     1,      1,      1,      1,      1])
 
 # In[11]:
 
 clst.fit(X, W)
 
-
+print "predicting:", clst.predict(np.array([[1, 3], [3.8, 4]]))
 # In[ ]:
 # print "clustering finish, output results:"
 # print "final inertia =", clst.inertia_
